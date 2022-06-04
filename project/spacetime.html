@@ -1,0 +1,136 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Li-Ke Ma">
+  <meta name="keywords" content="animation, spacetime bounds, reinforcement learning, graphics, eurographics">
+
+  <!-- source sans pro font -->
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+  <!-- bootstrap style -->
+  <link rel="stylesheet" type="text/css" href="../src/bootstrap/css/bootstrap.min.css" >
+  <!-- font awesome style -->
+  <link rel="stylesheet" type="text/css" href="../src/font-awesome/css/font-awesome.min.css">
+  <!-- costum style -->
+  <link rel="stylesheet" type="text/css" href="../src/costum_style.css">
+
+  <!-- javascript -->
+  <script src="../src/jquery-3.2.1.min.js"></script>
+  <script src="../src/bootstrap/js/bootstrap.min.js"></script>
+  
+  <!-- page information -->
+  <title>Li-Ke Ma's Project: Spacetime Bounds</title>
+
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115451279-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-115451279-2');
+  </script>
+</head>
+
+<body>
+  <div class="container">
+  <div class="content">
+    <a class="btn btn-info btn-sm" href="../index.html"> Li-Ke Ma's Homepage </a>
+
+    <h1 class="project-title">Learning and Exploring Motor Skills with Spacetime Bounds</h1>
+    <h1 class="project-title"><small> Eurographics 2021 </small></h1>
+
+    <!-- authors -->
+    <div class="row project-author">
+      <a href="" class="col-xs-1"></a>
+      <a target="_blank" href="https://milkpku.github.io" class="col-xs-2"> Li-Ke Ma <sup>1,2</sup> </a>
+      <a target="_blank" href="https://zeshiyang.github.io/" class="col-xs-2"> Zeshi Yang <sup>1</sup> </a>
+      <a target="_blank" href="http://www.xtong.info/" class="col-xs-2"> Xin Tong <sup>3</sup> </a>
+      <a target="_blank" href="https://www.microsoft.com/en-us/research/people/bainguo/" class="col-xs-2"> Baining Guo <sup>3</sup></a>
+      <a target="_blank" href="https://www.cs.sfu.ca/~kkyin/" class="col-xs-2"> KangKang Yin <sup>1</sup></a>
+      <a href="" class="col-xs-1"></a>
+    </div>
+
+    <br>
+
+    <!-- institutes -->
+    <div class="row project-institute">
+      <a target="_blank" href="https://www.sfu.ca" class="col-xs-4"><sup>1</sup> Simon Fraser University </a>
+      <a target="_blank" href="https://www.tsinghua.edu.cn" class="col-xs-4"><sup>2</sup> Tsinghua University </a>
+      <a target="_blank" href="https://www.msra.cn" class="col-xs-4"><sup>3</sup> Microsoft Research Asia </a>
+    </div>
+
+    <!-- cover -->
+    <div class="project-cover">
+      <img src="spacetime/teaser.svg" width="80%">
+    </div>
+    
+    <!-- abstract -->
+    <div class="project-abstract">
+      <h2 class="page-header"> Abstract </h2>
+      <p>Equipping characters with diverse motor skills is the current bottleneck of physics-based character animation. We propose a Deep Reinforcement Learning (DRL) framework that enables physics-based characters to learn and explore motor skills from reference motions not necessarily in high quality. The key insight is not to track the reference motion with an imitation reward, as other state-of-the-art DRL systems do. Rather, we use loose space-time constraints, termed spacetime bounds, to limit the search space on one hand, and to support style exploration on the other hand. As we only rely on the references to specify loose spacetime bounds, the quality of the references is thus not critical anymore. We compare our method with state-of-the-art tracking-based DRL methods. We also show how to guide style exploration within the proposed framework.</p>
+    </div>
+
+    <div class="row project-content">
+      <div class="col-xs-3">
+        <img src="spacetime/first_page.png" class="img-thumbnail" width="100%">
+      </div>
+      <div class="col-xs-3" style="margin: auto">
+        <div> 
+          <h3>Paper</h3>
+          <a class="btn btn-info btn-sm" href="https://1drv.ms/b/s!AtPg60qEJcxLkC4S55bNyhz-qlrA"> high resolution (17.1 MB)</a> 
+        </div>
+
+        <div>
+          <h3>Cite</h3>
+          <b class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bibtex"> BibTex </b>
+          <div id="Bibtex" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <iframe width="100%" scrolling="auto" frameborder="0" type="text" src="spacetime/spacetimeBounds.txt"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+            <h3>Video</h3>
+            <a class="btn btn-info btn-sm" href="https://1drv.ms/v/s!AtPg60qEJcxLkDDVXHNdgpIF9ozA?e=uprprg" download> spacetimeBounds.mp4 (117 MB)</a> 
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div> 
+          <h3>Slides</h3>
+          <a class="btn btn-info btn-sm" href="https://1drv.ms/p/s!AtPg60qEJcxLlRHkSvJbJxVNoLuP?e=IlUQ4E"> PPT (86.0 MB)</a> 
+        </div>
+
+        <div> 
+          <h3>Code</h3>
+          <a class="btn btn-info btn-sm" href="https://github.com/milkpku/spacetimeBounds"> GitHub </a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="project-video">
+      <h2 class="page-header"> Videos </h2>
+      <div class="row" align="middle">
+        <div class="col-xs-6">
+          <h4> Supplement Video on YouTube </h4>
+          <iframe width="480" height="270" 
+            src="https://www.youtube.com/embed/_ziBY0k7irI" 
+            frameborder="0" allowfullscreen>
+          </iframe>
+        </div>
+        <div class="col-xs-6">
+          <h4> Presentation Video </h4>
+          <iframe width="480" height="270" 
+            src="" 
+            frameborder="0" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>

@@ -1,0 +1,129 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Li-Ke Ma">
+  <meta name="keywords" content="computational fabrication, pneumatic, computational design, 3D printing, graphics, siggraph">
+
+  <!-- source sans pro font -->
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+  <!-- bootstrap style -->
+  <link rel="stylesheet" type="text/css" href="../src/bootstrap/css/bootstrap.min.css" >
+  <!-- font awesome style -->
+  <link rel="stylesheet" type="text/css" href="../src/font-awesome/css/font-awesome.min.css">
+  <!-- costum style -->
+  <link rel="stylesheet" type="text/css" href="../src/costum_style.css">
+
+  <!-- javascript -->
+  <script src="../src/jquery-3.2.1.min.js"></script>
+  <script src="../src/bootstrap/js/bootstrap.min.js"></script>
+  
+  <!-- page information -->
+  <title>Li-Ke Ma's Project: Pneumatic</title>
+
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115451279-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-115451279-2');
+  </script>
+</head>
+
+<body>
+  <div class="container">
+  <div class="content">
+    <a class="btn btn-info btn-sm" href="../index.html"> Li-Ke Ma's Homepage </a> 
+
+    <h1 class="project-title">Computational Design and Fabrication of Soft Pneumatic Objects with Desired Deformations</h1>
+    <h1 class="project-title"><small> SIGGRAPH Asia 2017 </small></h1>
+
+    <!-- authors -->
+    <div class="row project-author">
+      <a href="" class="col-xs-1"></a>
+      <a target="_blank" href="http://milkpku.github.io" class="col-xs-2"> Li-Ke Ma* <sup>1,2</sup> </a>
+      <a target="_blank" href="https://yizhongzhang1989.github.io" class="col-xs-2">Yizhong Zhang* <sup>2</sup> </a>
+      <a target="_blank" href="http://xueyuhanlang.github.io" class="col-xs-2"> Yang Liu <sup>2</sup></a>
+      <a target="_blank" href="http://www.kunzhou.net" class="col-xs-2"> Kun Zhou <sup>3</sup></a>
+      <a target="_blank" href="http://research.microsoft.com/en-us/um/people/xtong/xtong.html" class="col-xs-2"> Xin Tong <sup>2</sup></a>
+      <a href="" class="col-xs-1"></a>
+    </div>
+    
+    <!-- Joint first authors -->
+    <div class="project-author">(* Joint first authors) </small></div>
+
+    <!-- institutes -->
+    <div class="row project-institute">
+      <a target="_blank" href="https://www.tsinghua.edu.cn" class="col-xs-4"><sup>1</sup> Tsinghua University </a>
+      <a target="_blank" href="https://www.msra.cn" class="col-xs-4"><sup>2</sup> Microsoft Research Asia </a>
+      <a target="_blank" href="https://www.zju.edu.cn/" class="col-xs-4"><sup>3</sup> Zhejiang University </a>
+    </div>
+
+    <!-- cover -->
+    <div class="project-cover">
+      <img  src="pneumatic/pipeline.jpg" width="80%">
+    </div>
+    
+    <!-- abstract -->
+    <div class="project-abstract">
+      <h2 class="page-header"> Abstract </h2>
+      <p>We present an end-to-end solution for design and fabrication of soft pneumatic objects with desired deformations. Given a 3D object with its rest and deformed target shapes, our method automatically optimizes the chamber structure and material distribution inside the object volume so that the fabricated object can deform to all the target deformed poses with controlled air injection. To this end, our method models the object volume with a set of chambers separated by material shells. Each chamber has individual channels connected to the object surface and thus can be separately controlled with a pneumatic system, while the shell is comprised of base material with an embedded frame structure. A two-step algorithm is developed to compute the geometric layout of the chambers and frame structure as well as the material properties of the frame structure from the input. The design results can be fabricated with 3D printing and deformed by a controlled pneumatic system. We validate and demonstrate the efficacy of our method with soft pneumatic objects that have different shapes and deformation behaviors.</p>
+    </div>
+
+    <div class="row project-content">
+      <div class="col-xs-3">
+        <img src="pneumatic/first_page.png" class="img-thumbnail" width="100%">
+      </div>
+      <dir class="col-xs-9" style="margin: auto">
+        <div> 
+          <h3>Paper</h3>
+          <a class="btn btn-info btn-sm" href="pneumatic/Pneumatic_high.pdf"> high resolution (19.4 MB)</a> 
+          <a class="btn btn-info btn-sm" href="pneumatic/Pneumatic_low.pdf"> low resolution (1.9 MB)</a> 
+        </div>
+
+        <div>
+          <h3>Cite</h3>
+          <b class="btn btn-info btn-sm" data-toggle="modal" data-target="#Bibtex"> BibTex </b>
+          <div id="Bibtex" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <iframe width="100%" scrolling="auto" frameborder="0" type="text" src="pneumatic/pneumatic.txt"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+            <h3>Video</h3>
+            <a class="btn btn-info btn-sm" href="https://1drv.ms/v/s!AtPg60qEJcxLiSzjyA7SR0YIUyl5?e=9cwW74" download> pneumatic.mp4 (78.0 MB)</a> 
+        </div>
+      </dir>
+    </div>
+    
+    <div class="project-video">
+      <h2 class="page-header"> Videos </h2>
+      <div class="row"  align="middle">
+        <div class="col-xs-6">
+          <h4> Video on YouTube </h4>
+          <iframe width="480" height="270" 
+            src="https://www.youtube.com/embed/7pMIqnCvXQA" 
+            frameborder="0" allowfullscreen>
+          </iframe>
+        </div>
+        <div class="col-xs-6">
+          <h4> Video on YouKu </h4>
+          <iframe width="480" height="270"
+            src="https://player.youku.com/embed/XMzAzMDM5NjM3Mg==" 
+            frameborder=0 allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+  </div>
+</body>

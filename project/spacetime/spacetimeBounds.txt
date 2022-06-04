@@ -1,0 +1,9 @@
+@article{Ma:2021:SpacetimeBounds,
+  author  = {Ma, Li-Ke and Yang, Zeshi and Xin, Tong and Guo, Baining and Yin, KangKang},
+  title   = {Learning and Exploring Motor Skills with Spacetime Bounds},
+  journal = {Computer Graphics Forum},
+  volume  = {40},
+  number  = {2},
+  pages   = {251-263},
+  year    = {2021},
+}

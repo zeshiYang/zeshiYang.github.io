@@ -1,0 +1,108 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Zhiqi Yin">
+  <meta name="keywords" content="computer animation, physics based character control, stable PD control">
+
+  <!-- source sans pro font -->
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+  <!-- bootstrap style -->
+  <link rel="stylesheet" type="text/css" href="../../src/bootstrap/css/bootstrap.min.css" >
+  <!-- font awesome style -->
+  <link rel="stylesheet" type="text/css" href="../../src/font-awesome/css/font-awesome.min.css">
+  <!-- costum style -->
+  <link rel="stylesheet" type="text/css" href="../../src/costum_style.css">
+
+  <!-- javascript -->
+  <script src="../../src/jquery-3.2.1.min.js"></script>
+  <script src="../../src/bootstrap/js/bootstrap.min.js"></script>
+  
+  <!-- page information -->
+  <title>Jump</title>
+
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115451279-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-115451279-2');
+  </script>
+</head>
+
+<body>
+  <div class="container">
+  <div class="content">
+    <h1 class="project-title">Discovering Diverse Athletic Jumping Strategies</h1>
+    <h1 class="project-title"><small> ACM SIGGRAPH 2021 </small></h1>
+
+    <!-- authors -->
+    <div class="row project-author">
+      <a href="" class="col-xs-1"></a>
+      <a target="_blank" href="https://www.linkedin.com/in/zhiqi-yin-190680155/" class="col-xs-2"> Zhiqi Yin <sup>1</sup> </a>
+      <a class="col-xs-3"> Zeshi Yang <sup>1</sup> </a>
+      <a target="_blank" href="https://www.cs.ubc.ca/~van/" class="col-xs-3"> Michiel van de Panne <sup>2</sup> </a>
+      <a target="_blank" href="https://www.cs.sfu.ca/~kkyin/" class="col-xs-3"> KangKang Yin <sup>1</sup> </a>
+    </div>
+
+    <br>
+
+    <!-- institutes -->
+    <div class="row project-institute">
+      <a href="" class="col-xs-2"></a>
+      <a target="_blank" href="https://www.sfu.ca" class="col-xs-4"> <sup>1</sup> Simon Fraser University </a>
+      <a target="_blank" href="https://www.ubc.ca" class="col-xs-4"> <sup>2</sup> University of British Columbia </a>
+      <a href="" class="col-xs-2"></a>
+    </div>
+
+    <!-- cover -->
+    <div class="project-cover">
+      <img src="teaser.png" width="100%">
+    </div>
+    
+    <!-- abstract -->
+    <div class="project-abstract">
+      <h2 class="page-header"> Abstract </h2>
+      <p style="text-align:justify">
+We present a framework that enables the discovery of diverse and natural looking motion strategies for athletic skills such as the high jump. 
+The strategies are realized as control policies for physics-based characters. Given a task
+objective and an initial character configuration, the combination of physics
+simulation and deep reinforcement learning (DRL) provides a suitable starting point for automatic control policy training. To facilitate the learning
+of realistic human motions, we propose a Pose Variational Autoencoder
+(P-VAE) to constrain the actions to a subspace of natural poses. In contrast
+to motion imitation methods, a rich variety of novel strategies can naturally emerge by exploring initial character states through a sample-efficient
+Bayesian diversity search (BDS) algorithm. A second stage of optimization
+that encourages novel policies can further enrich the unique strategies discovered. Our method allows for the discovery of diverse and novel strategies
+for athletic jumping motions such as high jumps and obstacle jumps with
+no motion examples and less reward engineering than prior work.
+      </p>
+    </div>
+
+    <div class="row project-content">
+      <div class="col-xs-3">
+        <img src="first_page.png" class="img-thumbnail" width="100%">
+      </div>
+      <dir class="col-xs-9" style="margin: auto">
+        <div> 
+          <a class="btn btn-info btn-sm" href="https://www.cs.sfu.ca/~kkyin/papers/Jump.pdf"> Paper </a> 
+          <a class="btn btn-info btn-sm" href="https://www.cs.sfu.ca/~kkyin/papers/HighJumps.mp4"> Main Video </a> 
+          <a class="btn btn-info btn-sm" href="https://www.cs.sfu.ca/~kkyin/papers/ObstacleJumps.mp4"> Supplemental Video </a>
+          <a class="btn btn-info btn-sm" href="https://github.com/arpspoof/Jump"> Code </a>
+        </div>
+  </div>
+
+  <div class="project-video">
+      <h2 class="page-header"> Videos </h2>
+      <div class="row">
+        <div class="col-xs-12">
+          <iframe width="480" height="270"
+            src="https://www.youtube.com/embed/DAhZ6oDoNHg" 
+            frameborder="0" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
