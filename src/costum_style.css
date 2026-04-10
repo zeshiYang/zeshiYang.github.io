@@ -64,6 +64,12 @@ a {
   margin-right: 6px;
 }
 
+  .project-link {
+    color: #000000 !important;
+    font-style: italic;
+    text-decoration: underline;
+  }
+
 /* contact style */
 .con-item {
   font-size: 18px;
