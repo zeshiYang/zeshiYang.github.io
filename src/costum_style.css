@@ -173,6 +173,15 @@ a {
   align-items: center;
 }
 
+.industry-year {
+  color: #888;
+  margin-left: 10px;
+}
+
+.industry-item .project-link {
+  font-size: 18px;
+}
+
 .industry-item .img-thumbnail {
   width: 100%;
   height: 125px;
@@ -215,14 +224,14 @@ a {
   border-bottom: none;
 }
 
-.pub-item h2{
-  font-size: 18px;
-  margin-top: 0;
-  margin-bottom: 5px;
+.pub-item .pub-title{
+  color: #000;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
-.pub-item .pub-title{
-  color: #000000;
+.pub-item .pub-title:hover{
+  color: #1e40af;
 }
 
 .pub-item .pub-authors{
@@ -242,19 +251,23 @@ a {
 }
 
 .pub-item .btn-margin{
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 6px;
   margin-left: 0px;
-  margin-right: 6px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
+  margin-right: 8px;
+  padding: 4px 12px;
+  border-radius: 15px;
+  border: 1px solid rgba(30, 64, 175, 0.3);
+  background: rgba(30, 64, 175, 0.08);
+  color: #1e40af;
   transition: all 0.2s ease;
 }
 
 .pub-item .btn-margin:hover{
-  background: #4a6fa5;
-  color: #fff;
-  border-color: #4a6fa5;
+  background: rgba(30, 64, 175, 0.2);
+  color: #1e40af;
+  border-color: rgba(30, 64, 175, 0.5);
+  transform: translateY(-1px);
 }
 
 .pub-item img.img-thumbnail {
