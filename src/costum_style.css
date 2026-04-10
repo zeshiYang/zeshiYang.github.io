@@ -44,6 +44,15 @@ a {
   color: #000000;
 }
 
+.pub-item #authors{
+  color: #000000;
+}
+
+.pub-item #authors strong{
+  color: #000000;
+  font-weight: bold;
+}
+
 .pub-item #journal{
   font-style: italic;
 }
