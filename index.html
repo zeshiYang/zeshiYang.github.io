@@ -1,8 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="Li-Ke Ma">
+  <meta name="author" content="Zeshi Yang">
   <meta name="keywords" content="computer graphics, Ze-Shi Yang, Zeshi Yang">
 
   <!-- source sans pro font -->
@@ -39,22 +41,21 @@
   <!-- Biography -->
   <div id="biography" class="row display-flex">
     <!-- profile image -->
-    <div class="col-xs-5" align="center">
-          <img class="img-rounded" width="90%" src="id.png" data-holder-rendered="true">
+    <div class="col-xs-3" align="center">
+          <img class="img-circle" width="100%" src="id.png">
     </div>
 
     <!-- profile text -->
-    <div class="col-xs-7">
-
+    <div class="col-xs-9">
       <h1> Zeshi Yang (楊 澤世) </h1>
       <div id="biography_text">
-      I am a eclectic independent researcher, focusing on developing physically grounded and emotionally rich humanoid agents. I have a lot of experience at realizing agile and dexterous motions on simulated humanoids. I received my Ph.D. in 2023 from Simon Fraser University, where I worked on character animation, motion control and deep reinforcement learning. Prior to that, I earned a bachelor's degree in applied physics from USTC in 2018.</a>
+      I am an eclectic independent researcher, focusing on developing physically grounded and emotionally rich humanoid agents. I have a lot of experience at realizing agile and dexterous motions on simulated humanoids. I received my Ph.D. in 2023 from Simon Fraser University, where I worked on character animation, motion control and deep reinforcement learning. Prior to that, I earned a bachelor's degree in applied physics from USTC in 2018.
       </div>
-      <div class="row con-icon">
-        <a class="col-xs-2" href="#contact"> <i class="fa fa-envelope"></i></a>
-        <a class="col-xs-2" href="https://scholar.google.com/citations?user=OHQg5bcAAAAJ&hl=en"> <i class="fa fa-graduation-cap"></i></a>
+      <div class="bio-icons">
+        <a href="#contact"><img class="bio-icon-img" src="src/institude_icons/email.png" alt="Email"></a>
+        <a href="https://scholar.google.com/citations?user=OHQg5bcAAAAJ&hl=en"><img class="bio-icon-img" src="src/institude_icons/google_scholar.webp" alt="Google Scholar"></a>
+        <a href="https://www.zhihu.com/people/xiaoxin-89/posts"><img class="bio-icon-img" src="src/institude_icons/zhihu.png" alt="Zhihu"></a>
       </div>
-
     </div>
   </div>
 
@@ -62,44 +63,75 @@
   <div id="education">
     <h2 class="page-header"> Education & Career </h2>
 
+    <!-- Education -->
+    <h4 class="edu-subtitle"><i class="fa fa-graduation-cap"></i> Education</h4>
     <div class="row">
-      <!-- Education -->
       <div class="col-xs-6">
-
         <div class="edu-item">
-          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          B.S. in Applied Physics, University of Science and Technology of China, 2014 - 2018
+          <div class="edu-icon-wrap"><img class="edu-icon" src="src/institude_icons/USTC_logo_2008.svg.png" alt="USTC"></div>
+          <div class="edu-text">
+            B.S. in Applied Physics<br>
+            <span class="edu-inst">University of Science and Technology of China</span><br>
+            <span class="edu-year">2014 - 2018</span>
+          </div>
         </div>
-
-        <div class="edu-item">
-          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          Ph.D in Computer Science, Simon Fraser University, 2018 - 2023
-        </div>
-
       </div>
-
-      <!-- Career -->
       <div class="col-xs-6">
         <div class="edu-item">
-            <i class="fa fa-windows" aria-hidden="true"></i>
-            Visiting Scholar, Peking Univerisity, China, 2021 Aug - 2022 Aug
+          <div class="edu-icon-wrap"><img class="edu-icon" src="src/institude_icons/SFU.png" alt="SFU"></div>
+          <div class="edu-text">
+            Ph.D in Computer Science<br>
+            <span class="edu-inst">Simon Fraser University</span><br>
+            <span class="edu-year">2018 - 2023</span>
           </div>
-        
-        <div class="edu-item">
-            <i class="fa fa-windows" aria-hidden="true"></i>
-            Research Intern, LightSpeed Studios, Tencent America, 2022 Sep - 2023 May
-          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Career -->
+    <h4 class="edu-subtitle"><i class="fa fa-briefcase"></i> Career</h4>
+    <div class="row">
+      <div class="col-xs-6">
         <div class="edu-item">
-            <i class="fa fa-windows" aria-hidden="true"></i>
-            Research Scientist, miHoYo, 2023 June - 2024 Sep
+          <div class="edu-icon-wrap"><img class="edu-icon" src="src/institude_icons/pku.png" alt="PKU"></div>
+          <div class="edu-text">
+            Visiting Scholar<br>
+            <span class="edu-inst">Peking University, China</span><br>
+            <span class="edu-year">2021 Aug - 2022 Aug</span>
           </div>
-
+        </div>
+      </div>
+      <div class="col-xs-6">
         <div class="edu-item">
-            <i class="fa fa-windows" aria-hidden="true"></i>
-            Research Scientist, Anuttacon, 2024 Oct - Now
+          <div class="edu-icon-wrap"><img class="edu-icon wide" src="src/institude_icons/lightspeed.png" alt="LightSpeed"></div>
+          <div class="edu-text">
+            Research Intern<br>
+            <span class="edu-inst">LightSpeed Studios, Tencent America</span><br>
+            <span class="edu-year">2022 Sep - 2023 May</span>
           </div>
-        
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="edu-item">
+          <div class="edu-icon-wrap"><img class="edu-icon" src="src/institude_icons/mihoyo.png" alt="miHoYo"></div>
+          <div class="edu-text">
+            Research Scientist<br>
+            <span class="edu-inst">miHoYo</span><br>
+            <span class="edu-year">2023 June - 2024 Sep</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="edu-item">
+          <div class="edu-icon-wrap"><img class="edu-icon wide invert" src="src/institude_icons/anu.png" alt="Anuttacon"></div>
+          <div class="edu-text">
+            Research Scientist<br>
+            <span class="edu-inst">Anuttacon</span><br>
+            <span class="edu-year">2024 Oct - Now</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -108,12 +140,11 @@
     <!-- Research Interests -->
   <div id="research">
     <h2 class="page-header"> Research Interests </h2>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="edu-item">
-          Video generation as world models; World action models; Motion synthesis & control; Reinforcement learning.
-        </div>
-      </div>
+    <div class="research-tags">
+      <span class="research-tag">Video Generation as World Models</span>
+      <span class="research-tag">World Action Models</span>
+      <span class="research-tag">Motion Synthesis &amp; Control</span>
+      <span class="research-tag">Reinforcement Learning</span>
     </div>
   </div>
 
@@ -123,30 +154,42 @@
     <a name="projects-pos"></a>
     <h2 class="page-header"> Industry projects </h2>
 
-    <div class="row pub-item"> 
+    <div class="row pub-item industry-item">
       <div class="col-xs-3">
         <a href="https://large-performance-model.github.io/">
           <img class="img-thumbnail" src="lpm.png">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://large-performance-model.github.io/"> <strong>Tech lead </strong> of the online video generation model in <a class="project-link" href="https://large-performance-model.github.io/">LPM 1.0 (Large Performance Model)</a>, <br>
-          a video generation model supports <strong><em>infinite length</em></strong>, <strong><em>realtime</em></strong> and <strong><em>realistic</em></strong> streaming outputs!.
+        <a class="project-link" href="https://large-performance-model.github.io/"><h2><strong>LPM 1.0 (Large Performance Model)</strong></h2></a>
+        <div><strong><em>Infinite-length</em></strong>, <strong><em>realtime</em></strong>, <strong><em>realistic</em></strong> streaming video generation model.</div>
+        <div><strong>Tech lead</strong> of the online video generation model.</div>
+        <div class="industry-links">
+          <a href="https://large-performance-model.github.io/"><i class="fa fa-external-link"></i> Project Page</a>
+          <a href="https://arxiv.org/pdf/2604.07823"><i class="fa fa-file-text-o"></i> Technical Report</a>
+        </div>
       </div>
     </div>
-  </div>
-  <br>
+    <br>
 
-    <div class="row pub-item"> 
+    <div class="row pub-item industry-item">
       <div class="col-xs-3">
         <a href="https://store.steampowered.com/app/3730100/Whispers_from_the_Star/">
           <img class="img-thumbnail" src="header.jpg">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://store.steampowered.com/app/3730100/Whispers_from_the_Star/"> <strong>Tech lead </strong> of the motion generation system in <strong>Whispers from stars</strong></a>.
+        <a class="project-link" href="https://store.steampowered.com/app/3730100/Whispers_from_the_Star/"><h2><strong>Whispers from the Star</strong></h2></a>
+        <div>An AI-driven game with emotionally rich humanoid agents.</div>
+        <div><strong>Tech lead</strong> of the motion generation system.</div>
+        <div class="industry-links">
+          <a href="https://store.steampowered.com/app/3730100/Whispers_from_the_Star/"><i class="fa fa-steam"></i> Steam</a>
+          <a href="https://www.youtube.com/watch?v=MXVuYps78nM"><i class="fa fa-youtube-play"></i> YouTube</a>
+          <a href="https://www.bilibili.com/video/BV193vAzNEHv/"><i class="fa fa-play-circle"></i> Bilibili</a>
+        </div>
       </div>
     </div>
+  </div>
 
 
 
@@ -164,80 +207,72 @@
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://liangpan99.github.io/TokenHSI/"> <h2> <strong>TokenHSI: Unified Synthesis of Physical Human-Scene Interactions through Task Tokenization</strong></h2></a>
-        <div id="authors"> Liang Pan, <strong>Zeshi Yang</strong>, Zhiyang Dou, Wenjia Wang, Buzhen Huang, Bo Dai,<br>Taku Komura, Jingbo Wang† </div>
-        <div id="journal" style="display: inline-block; margin-right: 15px;">  CVPR 2025 </div>
+        <a class="pub-title" href="https://liangpan99.github.io/TokenHSI/"> <h2> <strong>TokenHSI: Unified Synthesis of Physical Human-Scene Interactions through Task Tokenization</strong></h2></a>
+        <div class="pub-authors"> Liang Pan, <strong>Zeshi Yang</strong>, Zhiyang Dou, Wenjia Wang, Buzhen Huang, Bo Dai,<br>Taku Komura, Jingbo Wang† </div>
+        <div class="pub-journal" style="display: inline-block; margin-right: 15px;">  CVPR 2025 </div>
         <a class="btn btn-default btn-sm btn-margin" href="https://arxiv.org/pdf/2503.19901" download> Paper</a>
       </div>
     </div>
-    <br>    
 
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="https://arxiv.org/pdf/2410.00270">
           <img class="img-thumbnail" src="project/inbetweening.png">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://arxiv.org/pdf/2410.00270"> <h2> <strong>Real-time Diverse Motion In-betweening with Space-time Control</strong></h2></a>
-        <div id="authors"> Yuchen Chu, <strong>Zeshi Yang</strong> </div>
-        <div id="journal">  ACM SIGGRAPH Conference on Motion, Interaction and Games (MIG 2024) </div>
+        <a class="pub-title" href="https://arxiv.org/pdf/2410.00270"> <h2> <strong>Real-time Diverse Motion In-betweening with Space-time Control</strong></h2></a>
+        <div class="pub-authors"> Yuchen Chu, <strong>Zeshi Yang</strong> </div>
+        <div class="pub-journal">  ACM SIGGRAPH Conference on Motion, Interaction and Games (MIG 2024) </div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="https://arxiv.org/pdf/2410.00270" download> Paper</a>
             <a class="btn btn-default btn-sm btn-margin" href="https://www.youtube.com/watch?v=TcyjjXR_xV4"> Video</a>
         </div>
       </div>
     </div>
-    <br>
 
-
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="https://arxiv.org/abs/2309.1032">
           <img class="img-thumbnail" src="project/pack.png">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://arxiv.org/abs/2309.10329"> <h2> <strong>Learning-based 2D Irregular Shape Packing</strong></h2></a>
-        <div id="authors"> <strong>Zeshi Yang</strong>, Zherong Pan, Manyi Li, Kui Wu, Xifeng Gao </div>
-        <div id="journal">  ACM Transactions on Graphics, Volume 42, Article 6 (Proc. ACM SIGGRAPH Aisa 2023) </div>
+        <a class="pub-title" href="https://arxiv.org/abs/2309.10329"> <h2> <strong>Learning-based 2D Irregular Shape Packing</strong></h2></a>
+        <div class="pub-authors"> <strong>Zeshi Yang</strong>, Zherong Pan, Manyi Li, Kui Wu, Xifeng Gao </div>
+        <div class="pub-journal">  ACM Transactions on Graphics, Volume 42, Article 6 (Proc. ACM SIGGRAPH Aisa 2023) </div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="https://arxiv.org/abs/2309.10329" download> Paper</a>
         </div>
       </div>
     </div>
-    <br>
 
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="https://summit.sfu.ca/_flysystem/fedora/2023-04/etd22376.pdf">
           <img class="img-thumbnail" src="project/thesis.png">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://summit.sfu.ca/_flysystem/fedora/2023-04/etd22376.pdf"> <h2> <strong>Acquiring Stylized Motor Skills for Physics-based Characters</strong></h2></a>
-        <div id="journal"> PhD Thesis, Simon Fraser University, 2023</div>
+        <a class="pub-title" href="https://summit.sfu.ca/_flysystem/fedora/2023-04/etd22376.pdf"> <h2> <strong>Acquiring Stylized Motor Skills for Physics-based Characters</strong></h2></a>
+        <div class="pub-journal"> PhD Thesis, Simon Fraser University, 2023</div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="https://summit.sfu.ca/_flysystem/fedora/2023-04/etd22376.pdf" download> Paper</a>
         </div>
       </div>
     </div>
-    <br>
-    
 
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="https://arxiv.org/abs/2205.14313">
           <img class="img-thumbnail" src="project/chopsticks/teaser.PNG">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://arxiv.org/abs/2205.14313"> <h2> <strong>Learning to Use Chopsticks in Diverse Gripping Styles</strong></h2></a>
-        <div id="authors"> <strong>Zeshi Yang</strong>, KangKang Yin, Libin Liu </div>
-        <!-- <div id="journal">  to appear on Eurographics 2021 </div> -->
-        <div id="journal">  ACM Transactions on Graphics, Volume 41, Issue 4, Article 95 (Proc. ACM SIGGRAPH 2022) </div>
+        <a class="pub-title" href="https://arxiv.org/abs/2205.14313"> <h2> <strong>Learning to Use Chopsticks in Diverse Gripping Styles</strong></h2></a>
+        <div class="pub-authors"> <strong>Zeshi Yang</strong>, KangKang Yin, Libin Liu </div>
+        <!-- <div class="pub-journal">  to appear on Eurographics 2021 </div> -->
+        <div class="pub-journal">  ACM Transactions on Graphics, Volume 41, Issue 4, Article 95 (Proc. ACM SIGGRAPH 2022) </div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="https://arxiv.org/abs/2205.14313" download> Paper</a>
             <a class="btn btn-default btn-sm btn-margin" href="https://www.youtube.com/watch?v=xLzA84ZYt0k"> Video</a>
@@ -245,20 +280,18 @@
         </div>
       </div>
     </div>
-    <br>
-    
 
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="project/bo/bo.html">
           <img class="img-thumbnail" src="project/bo/teaser_new.PNG">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="project/bo/bo.html"> <h2> <strong>Efficient Hyperparameter Optimization for Physics-based Character Animation</strong></h2></a>
-        <div id="authors"> <strong>Zeshi Yang</strong>, Zhiqi Yin </div>
-        <!-- <div id="journal">  to appear on Eurographics 2021 </div> -->
-        <div id="journal">  ACM SIGGRAPH Symposium on Interactive 3D Graphics and Games 2021 (I3D 2021)</div>
+        <a class="pub-title" href="project/bo/bo.html"> <h2> <strong>Efficient Hyperparameter Optimization for Physics-based Character Animation</strong></h2></a>
+        <div class="pub-authors"> <strong>Zeshi Yang</strong>, Zhiqi Yin </div>
+        <!-- <div class="pub-journal">  to appear on Eurographics 2021 </div> -->
+        <div class="pub-journal">  ACM SIGGRAPH Symposium on Interactive 3D Graphics and Games 2021 (I3D 2021)</div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="project/bo/bo.html"> Project </a>
             <a class="btn btn-default btn-sm btn-margin" href="https://arxiv.org/pdf/2104.12365.pdf" download> Paper</a>
@@ -267,19 +300,17 @@
       </div>
     </div>
 
-    <br>
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="project/jump/jump.html">
           <img class="img-thumbnail" src="project/jump/teaser_new.PNG">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="project/jump/jump.html"> <h2> <strong>Discovering Diverse Athletic Jumping Strategies</strong></h2></a>
-        <div id="authors"> Zhiqi Yin, <strong>Zeshi Yang</strong>, Michiel van de Panne, KangKang Yin </div>
-        <!-- <div id="journal">  to appear on Eurographics 2021 </div> -->
-        <div id="journal">  ACM Transactions on Graphics, Volume 40, Issue 4, Article 91 (Proc. ACM SIGGRAPH 2021) </div>
+        <a class="pub-title" href="project/jump/jump.html"> <h2> <strong>Discovering Diverse Athletic Jumping Strategies</strong></h2></a>
+        <div class="pub-authors"> Zhiqi Yin, <strong>Zeshi Yang</strong>, Michiel van de Panne, KangKang Yin </div>
+        <!-- <div class="pub-journal">  to appear on Eurographics 2021 </div> -->
+        <div class="pub-journal">  ACM Transactions on Graphics, Volume 40, Issue 4, Article 91 (Proc. ACM SIGGRAPH 2021) </div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="project/jump/jump.html"> Project </a>
             <a class="btn btn-default btn-sm btn-margin" href="https://www.cs.sfu.ca/~kkyin/papers/Jump.pdf" download> Paper</a>
@@ -289,39 +320,33 @@
       </div>
     </div>
 
-    <br>
-
-
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="https://arxiv.org/pdf/2012.04195.pdf">
           <img class="img-thumbnail" src="project/shit/shit.PNG">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://arxiv.org/pdf/2012.04195.pdf"> <h2> <strong>Neural fidelity warping for efficient robot morphology design</strong></h2></a>
-        <div id="authors"> Sha Hu, <strong>Zeshi Yang</strong>, Greg Mori</div>
-        <div id="journal"> 2021 International Conference on Robotics and Automation (ICRA 2021)</div>
+        <a class="pub-title" href="https://arxiv.org/pdf/2012.04195.pdf"> <h2> <strong>Neural fidelity warping for efficient robot morphology design</strong></h2></a>
+        <div class="pub-authors"> Sha Hu, <strong>Zeshi Yang</strong>, Greg Mori</div>
+        <div class="pub-journal"> 2021 International Conference on Robotics and Automation (ICRA 2021)</div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="https://arxiv.org/pdf/2012.04195.pdf" download> Paper</a>
         </div>
       </div>
     </div>
 
-    <br>
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="project/spacetime.html">
           <img class="img-thumbnail" src="project/spacetime/spacetime_thumbnail.png">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="project/spacetime.html"> <h2> <strong>Learning and Exploring Motor Skills with Spacetime Bounds</strong></h2></a>
-        <div id="authors"> Li-Ke Ma, <strong>Zeshi Yang</strong>, Xin Tong, Baining Guo, KangKang Yin </div>
-        <!-- <div id="journal">  to appear on Eurographics 2021 </div> -->
-        <div id="journal">  Computer Graphics Forum (Eurographics), 40, 2(2021) </div>
+        <a class="pub-title" href="project/spacetime.html"> <h2> <strong>Learning and Exploring Motor Skills with Spacetime Bounds</strong></h2></a>
+        <div class="pub-authors"> Li-Ke Ma, <strong>Zeshi Yang</strong>, Xin Tong, Baining Guo, KangKang Yin </div>
+        <!-- <div class="pub-journal">  to appear on Eurographics 2021 </div> -->
+        <div class="pub-journal">  Computer Graphics Forum (Eurographics), 40, 2(2021) </div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="project/spacetime.html"> Project </a>
             <a class="btn btn-default btn-sm btn-margin" href="https://1drv.ms/b/s!AtPg60qEJcxLkC4S55bNyhz-qlrA" download> Paper</a>
@@ -333,38 +358,33 @@
       </div>
     </div>
 
-    <br>
-
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="https://arxiv.org/pdf/2008.00324.pdf">
           <img class="img-thumbnail" src="project/robust/teaser.PNG">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="https://arxiv.org/pdf/2008.00324.pdf"> <h2> <strong>Improving Skeleton-based Action Recognition
+        <a class="pub-title" href="https://arxiv.org/pdf/2008.00324.pdf"> <h2> <strong>Improving Skeleton-based Action Recognition
           with Robust Spatial and Temporal Features</strong></h2></a>
-        <div id="authors"> <strong>Zeshi Yang</strong>, Kangkang Yin </div>
-        <div id="journal"> In Arxiv 2020</div>
+        <div class="pub-authors"> <strong>Zeshi Yang</strong>, Kangkang Yin </div>
+        <div class="pub-journal"> In Arxiv 2020</div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="https://arxiv.org/pdf/2008.00324.pdf" download> Paper</a>
         </div>
       </div>
     </div>
 
-    <br>
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="project/hairyball.html">
           <img class="img-thumbnail" src="project/hairyball/hairyball_thumbnail.svg">
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="project/hairyball.html"> <h2> <strong>Towards Robust Direction Invariance in Character Animation</strong></h2></a>
-        <div id="authors"> Li-Ke Ma, <strong>Zeshi Yang</strong>, Baining Guo, KangKang Yin </div>
-        <div id="journal">  Computer Graphics Forum (Pacific Graphics), 39, 7(2019) </div>
+        <a class="pub-title" href="project/hairyball.html"> <h2> <strong>Towards Robust Direction Invariance in Character Animation</strong></h2></a>
+        <div class="pub-authors"> Li-Ke Ma, <strong>Zeshi Yang</strong>, Baining Guo, KangKang Yin </div>
+        <div class="pub-journal">  Computer Graphics Forum (Pacific Graphics), 39, 7(2019) </div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="project/hairyball.html"> Project </a>
             <a class="btn btn-default btn-sm btn-margin" href="https://1drv.ms/b/s!AtPg60qEJcxLiS5vxjnXkK7o_0dD?e=qZ96P7" download> Paper</a>
@@ -375,18 +395,16 @@
       </div>
     </div>
 
-    <br>
-
-    <div class="row pub-item"> 
+    <div class="row pub-item">
       <div class="col-xs-3">
         <a href="http://staff.ustc.edu.cn/~fuxm/projects/REM/index.html">
           <img class="img-thumbnail" src="project/rem/teaser.PNG" >
         </a>
       </div>
       <div class="col-xs-9">
-        <a id="title" href="http://staff.ustc.edu.cn/~fuxm/projects/REM/index.html"> <h2> <strong>Redirected Smooth Mappings for Multiuser Real Walking in Virtual Reality</strong></h2></a>
-        <div id="authors"> Zhi-Chao Dong, Xiao-Ming Fu, <strong>Zeshi Yang</strong>, Ligang Liu </div>
-        <div id="journal">  ACM Transactions on Graphics, 38(5), 2019.(Presented at Siggraph Asia) </div>
+        <a class="pub-title" href="http://staff.ustc.edu.cn/~fuxm/projects/REM/index.html"> <h2> <strong>Redirected Smooth Mappings for Multiuser Real Walking in Virtual Reality</strong></h2></a>
+        <div class="pub-authors"> Zhi-Chao Dong, Xiao-Ming Fu, <strong>Zeshi Yang</strong>, Ligang Liu </div>
+        <div class="pub-journal">  ACM Transactions on Graphics, 38(5), 2019.(Presented at Siggraph Asia) </div>
         <div>
             <a class="btn btn-default btn-sm btn-margin" href="http://staff.ustc.edu.cn/~fuxm/projects/REM/index.html"> Project </a>
             <a class="btn btn-default btn-sm btn-margin" href="https://rec.ustc.edu.cn/share/d2028f60-c87a-11e9-9fd7-b3a841be88b1" download> Paper</a>
@@ -395,9 +413,6 @@
         </div>
       </div>
     </div>
-    
-    <br>
-
 
   </div>
 
@@ -408,12 +423,12 @@
 
     <div class="row pub-item"> 
       <div class="col-xs-2" align="center">
-        <a id="title" target="_blank" href="https://github.com/milkpku/IGsolver">
+        <a class="pub-title" target="_blank" href="https://github.com/milkpku/IGsolver">
           <h2><strong>IGsolver</strong></h2>
         </a> 
       </div>
       <div class="col-xs-10">
-        <a id="title" target="_blank" href="https://github.com/milkpku/IGsolver"><strong>IGsolver</strong></a> is a C++ library implements several basic optimization algorithms (Newtown-Raphson algoritm for unconstrained optimization, SQP for equality constrained optimization).
+        <a class="pub-title" target="_blank" href="https://github.com/milkpku/IGsolver"><strong>IGsolver</strong></a> is a C++ library implements several basic optimization algorithms (Newtown-Raphson algoritm for unconstrained optimization, SQP for equality constrained optimization).
       </div>
     </div>
 
@@ -421,12 +436,12 @@
 
     <div class="row pub-item"> 
       <div class="col-xs-2" align="center">
-        <a id="title" target="_blank" href="https://github.com/milkpku/IGsim">
+        <a class="pub-title" target="_blank" href="https://github.com/milkpku/IGsim">
           <h2><strong>IGsim</strong></h2>
         </a> 
       </div>
       <div class="col-xs-10">
-        <a id="title" target="_blank" href="https://github.com/milkpku/IGsim"><strong>IGsim</strong></a> is a tiny C++ library for FEM based deformable object simulation. It implements functions that calculate deformation energy, force, sitffness matrix and material gradient of neo-hookean materials.
+        <a class="pub-title" target="_blank" href="https://github.com/milkpku/IGsim"><strong>IGsim</strong></a> is a tiny C++ library for FEM based deformable object simulation. It implements functions that calculate deformation energy, force, sitffness matrix and material gradient of neo-hookean materials.
       </div>
     </div>
 
@@ -439,7 +454,7 @@
         </a>
       </div>
       <div class="col-xs-10">
-        <a id="title" href="https://github.com/milkpku/tetgen_gui"><strong>Tetgen_gui</strong></a> is a GUI wrapper for <a id="title" href="http://wias-berlin.de/software/index.jsp?id=TetGen&lang=1"><strong>Tetgen</strong></a> that facilitates the process of tetrahedralizaiton of 3D meshes. It takes in 3D models (obj/off/ply/stl) and outputs tetrahedron mesh, and supports exporting region information.
+        <a class="pub-title" href="https://github.com/milkpku/tetgen_gui"><strong>Tetgen_gui</strong></a> is a GUI wrapper for <a class="pub-title" href="http://wias-berlin.de/software/index.jsp?id=TetGen&lang=1"><strong>Tetgen</strong></a> that facilitates the process of tetrahedralizaiton of 3D meshes. It takes in 3D models (obj/off/ply/stl) and outputs tetrahedron mesh, and supports exporting region information.
       </div>
     </div>
   </div> -->
@@ -451,9 +466,16 @@
 
     <div class="con-item">
       <i class="fa fa-envelope"></i> Email: zs243[at]mail.ustc.edu.cn
+    </div>
+    <div class="con-item">
       <i class="fa fa-envelope"></i> Email: zeshiyang209[at]gmail.com
     </div>
+  <!-- Footer -->
+  <div class="site-footer">
+    &copy; 2026 Zeshi Yang. Last updated April 2026.
   </div>
+
 </div>
 </div>
 </body>
+</html>
