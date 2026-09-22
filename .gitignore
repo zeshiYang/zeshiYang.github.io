@@ -1,0 +1,5 @@
+# macOS 在 exFAT/NTFS 等不支持扩展属性的卷上生成的 AppleDouble 伴随文件
+._*
+.DS_Store
+.Spotlight-V100
+.Trashes
