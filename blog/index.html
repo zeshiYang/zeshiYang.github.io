@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zeshi Yang">
+<meta name="keywords" content="Zeshi Yang, blog, reinforcement learning, humanoid, character animation, research notes">
+<meta name="description" content="Notes and essays by Zeshi Yang on reinforcement learning, humanoid agents and character animation.">
+
+<title>Zeshi Yang's Blog</title>
+
+<!-- source sans pro font, matching the rest of the site -->
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700' rel='stylesheet' type='text/css'>
+<!-- font awesome style -->
+<link rel="stylesheet" type="text/css" href="../src/font-awesome/css/font-awesome.min.css">
+
+<style>
+:root {
+    --accent: #1e40af;
+    --accent-soft: #3b82f6;
+    --link: #4a6fa5;
+    --text-dark: #111827;
+    --text-medium: #444;
+    --text-light: #888;
+    --surface: #f8f9fa;
+    --border-soft: #eee;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 20%, #334155 40%, #475569 60%, #64748b 80%, #cbd5e1 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); transition: color .2s ease; }
+a:hover { color: var(--accent); }
+
+.container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    max-width: 1120px;
+    width: 100%;
+    margin: 50px auto;
+}
+.content { margin: 5%; }
+
+body { padding-top: 30px; }
+
+/* fixed site navigation, mirroring .site-nav in ../src/costum_style.css */
+.site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 12px 0;
+    background: rgba(255,255,255,.98);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.site-nav-container {
+    max-width: 1120px; margin: 0 auto; padding: 0 20px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.site-nav-logo {
+    font-size: 20px; font-weight: 700;
+    color: var(--accent); text-decoration: none;
+}
+.site-nav-logo:hover { color: var(--accent); text-decoration: none; }
+.site-nav-menu {
+    display: flex; align-items: center; gap: 28px;
+    list-style: none; margin: 0; padding: 0;
+}
+.site-nav-link {
+    position: relative;
+    font-size: 15px; font-weight: 500;
+    color: var(--text-medium); text-decoration: none;
+    transition: color .2s ease;
+}
+.site-nav-link:hover,
+.site-nav-link.active { color: var(--accent); text-decoration: none; }
+.site-nav-link::after {
+    content: '';
+    position: absolute; bottom: -5px; left: 0;
+    width: 0; height: 2px; background: var(--accent);
+    transition: width .3s ease;
+}
+.site-nav-link:hover::after,
+.site-nav-link.active::after { width: 100%; }
+
+.blog-header { margin: 8px 0 8px; }
+.blog-header h1 { font-size: 2em; margin: 0; }
+.blog-intro {
+    font-size: 16px; color: var(--text-medium);
+    max-width: 44rem;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+/* ---------- post list ---------- */
+.post-item {
+    padding: 18px 14px;
+    border-bottom: 1px solid var(--border-soft);
+    border-radius: 6px;
+    transition: background-color .2s ease, box-shadow .2s ease;
+}
+.post-item:hover {
+    background-color: var(--surface);
+    box-shadow: 0 1px 6px rgba(0,0,0,.06);
+}
+.post-item:last-child { border-bottom: none; }
+
+.post-date {
+    font-size: 13px; color: var(--text-light);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+.post-title {
+    display: inline-block;
+    font-size: 19px; font-weight: 600; line-height: 1.35;
+    color: #000; text-decoration: none;
+}
+.post-title:hover { color: var(--accent); text-decoration: none; }
+.post-summary {
+    font-size: 15px; color: var(--text-medium);
+    max-width: 46rem;
+    margin-top: 5px;
+}
+.post-tags { margin-top: 9px; }
+.post-tag {
+    display: inline-block;
+    padding: 3px 13px; margin-right: 7px;
+    font-size: 12px;
+    background: rgba(30,64,175,.08);
+    border: 1px solid rgba(30,64,175,.25);
+    color: var(--accent);
+    border-radius: 14px;
+}
+
+/* ---------- elsewhere ---------- */
+.elsewhere {
+    margin-top: 34px; padding-top: 20px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 15px; color: var(--text-medium);
+}
+.elsewhere i { margin-right: 6px; }
+
+.site-footer {
+    text-align: center;
+    padding: 20px 0; margin-top: 30px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 13px; color: #999;
+}
+
+@media (max-width: 640px) {
+    body { font-size: 16px; }
+    .container { margin: 20px auto; }
+    .content { margin: 6%; }
+    .blog-header h1 { font-size: 1.6em; }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-container">
+    <a href="../index.html" class="site-nav-logo">Zeshi Yang</a>
+    <ul class="site-nav-menu">
+      <li><a href="../index.html" class="site-nav-link">Home</a></li>
+      <li><a href="index.html" class="site-nav-link active">Blogs</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+<div class="content">
+
+    <div class="blog-header">
+        <h1>Blog</h1>
+    </div>
+    <div class="blog-intro">
+        Notes on reinforcement learning, humanoid agents and character animation &mdash; mostly derivations I worked through for my own understanding, written up in case they are useful to someone else.
+    </div>
+
+    <!-- To add a post, copy one .post-item block and change the date, link, title, summary and tags. -->
+
+    <div class="post-item">
+        <div class="post-date">September 20, 2026</div>
+        <a class="post-title" href="rl-score-centering-ste.html">Is OpenAI's Mysterious RL Algorithm Just an STE Approximation?</a>
+        <div class="post-summary">
+            Score centering, proposed in a recent arXiv paper as a possible account of OpenAI's post-training algorithm, turns out to be an approximate straight-through estimator that compensates for the Megatron/vLLM train-inference mismatch. A derivation from the information-geometric optimization perspective, and why clipping is the wrong tool here.
+        </div>
+        <div class="post-tags">
+            <span class="post-tag">Reinforcement Learning</span>
+            <span class="post-tag">LLM</span>
+            <span class="post-tag">Paper Notes</span>
+        </div>
+    </div>
+
+    <div class="elsewhere">
+        <i class="fa fa-external-link"></i>I also write in Chinese on
+        <a href="https://www.zhihu.com/people/xiaoxin-89/posts">Zhihu</a>.
+    </div>
+
+    <div class="site-footer">
+        &copy; 2026 Zeshi Yang.
+    </div>
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zeshi Yang">
+<meta name="keywords" content="reinforcement learning, LLM, score centering, straight-through estimator, STE, off-policy, information-geometric optimization, Megatron, vLLM">
+<meta name="description" content="Score centering, the method behind a recent arXiv paper on off-policy RL, can be read as an approximate straight-through estimator that compensates for the Megatron/vLLM train-inference mismatch.">
+
+<title>Zeshi Yang's Blog: Is OpenAI's Mysterious RL Algorithm Just an STE Approximation?</title>
+
+<!-- source sans pro font, matching the rest of the site -->
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700' rel='stylesheet' type='text/css'>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] },
+  startup: {
+    ready: function () {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(function () {
+        document.body.classList.add('math-ready');
+      });
+    }
+  }
+};
+</script>
+<!-- cdnjs rather than jsdelivr: jsdelivr is not reliably reachable for readers in mainland China -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.js"></script>
+
+<style>
+:root {
+    --accent: #1e40af;
+    --accent-soft: #3b82f6;
+    --link: #4a6fa5;
+    --text-dark: #111827;
+    --text-medium: #444;
+    --text-light: #888;
+    --surface: #f8f9fa;
+    --border-soft: #eee;
+    --border-line: #e2e8f0;
+    --measure: 44rem;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 20%, #334155 40%, #475569 60%, #64748b 80%, #cbd5e1 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); transition: color .2s ease; }
+a:hover { color: var(--accent); }
+
+/* Keep raw TeX hidden until MathJax has typeset it */
+.article-card { opacity: 0; transition: opacity .25s ease; }
+body.math-ready .article-card,
+body.math-failed .article-card { opacity: 1; }
+
+/* ---------- reading progress ---------- */
+.progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 1100; }
+.progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+    transition: width .1s linear;
+}
+
+/* ---------- top bar ---------- */
+.topbar {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(255,255,255,.97);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    padding: .7rem 0;
+}
+.topbar-inner {
+    max-width: 1120px; margin: 0 auto; padding: 0 1.5rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+/* fixed site navigation, mirroring .site-nav in ../src/costum_style.css */
+.site-nav-logo {
+    font-size: 20px; font-weight: 700;
+    color: var(--accent); text-decoration: none;
+}
+.site-nav-logo:hover { color: var(--accent); text-decoration: none; }
+.site-nav-menu {
+    display: flex; align-items: center; gap: 28px;
+    list-style: none; margin: 0; padding: 0;
+}
+.site-nav-link {
+    position: relative;
+    font-size: 15px; font-weight: 500;
+    color: var(--text-medium); text-decoration: none;
+    transition: color .2s ease;
+}
+.site-nav-link:hover,
+.site-nav-link.active { color: var(--accent); text-decoration: none; }
+.site-nav-link::after {
+    content: '';
+    position: absolute; bottom: -5px; left: 0;
+    width: 0; height: 2px; background: var(--accent);
+    transition: width .3s ease;
+}
+.site-nav-link:hover::after,
+.site-nav-link.active::after { width: 100%; }
+
+/* ---------- layout ---------- */
+.page {
+    max-width: 1120px; margin: 0 auto;
+    padding: 5.5rem 1.5rem 3rem;
+    display: grid; grid-template-columns: minmax(0, 1fr) 14.5rem; gap: 2rem;
+    align-items: start;
+}
+
+.article-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 3rem clamp(1.3rem, 4vw, 3.2rem);
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    min-width: 0;
+}
+
+/* ---------- article header ---------- */
+.eyebrow {
+    display: inline-block;
+    font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(30,64,175,.1);
+    border: 1px solid rgba(30,64,175,.3);
+    padding: .25rem .9rem; border-radius: 22px;
+    margin-bottom: 1.1rem;
+}
+h1 {
+    font-size: clamp(1.7rem, 3.6vw, 2.2rem);
+    font-weight: 700; line-height: 1.3;
+    color: var(--text-dark); margin-bottom: .8rem;
+}
+.byline {
+    display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+    font-size: .9rem; color: var(--text-light);
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 1.7rem;
+}
+.byline .sep { color: #ccc; }
+.byline strong { color: #000; font-weight: 600; }
+
+/* ---------- paper callout ---------- */
+.paper-ref {
+    display: flex; gap: .9rem; align-items: baseline;
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: .9rem 1.1rem;
+    margin-bottom: 1.9rem;
+    font-size: .92rem;
+}
+.paper-ref .label {
+    font-size: .7rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--accent); white-space: nowrap;
+}
+.paper-ref cite { font-style: italic; color: var(--text-dark); }
+
+/* ---------- body copy ---------- */
+.lede { font-size: 1.06rem; color: var(--text-medium); margin-bottom: 2rem; }
+
+h2 {
+    font-size: 1.35rem; font-weight: 700;
+    color: var(--text-dark);
+    margin: 2.6rem 0 1rem;
+    padding-top: .4rem;
+    position: relative;
+}
+h2::before {
+    content: '';
+    position: absolute; top: -.85rem; left: 0;
+    width: 42px; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+}
+p { margin-bottom: 1.05rem; font-size: 1rem; max-width: var(--measure); }
+p:last-child { margin-bottom: 0; }
+
+.anchor {
+    opacity: 0; margin-left: .45rem; font-size: .8em; font-weight: 400;
+    color: var(--text-light); text-decoration: none;
+    transition: opacity .2s ease;
+}
+h2:hover .anchor { opacity: 1; }
+.anchor:hover { color: var(--accent); }
+
+/* ---------- math ---------- */
+/* Note: MathJax writes an inline font-size on mjx-container, so math can only be
+   scaled from the parent .eq, never from a rule on mjx-container itself. */
+mjx-container[display="true"] { margin: 1.4rem 0 !important; padding: .3rem 0; }
+
+.eq {
+    background-color: var(--surface);
+    /* Scroll shadows. The two `local` layers scroll with the content and act as
+       masks; the two `scroll` layers are the shadows pinned to the box edges.
+       At rest a mask covers its shadow, so a shadow only shows while there is
+       more of the equation in that direction. Purely declarative, no JS. */
+    background-image:
+        linear-gradient(90deg, var(--surface) 30%, rgba(248,249,250,0)),
+        linear-gradient(90deg, rgba(248,249,250,0), var(--surface) 70%),
+        radial-gradient(farthest-side at 0 50%, rgba(15,23,42,.20), rgba(15,23,42,0)),
+        radial-gradient(farthest-side at 100% 50%, rgba(15,23,42,.20), rgba(15,23,42,0));
+    background-position: left center, right center, left center, right center;
+    background-repeat: no-repeat;
+    background-size: 40px 100%, 40px 100%, 16px 100%, 16px 100%;
+    background-attachment: local, local, scroll, scroll;
+    border: 1px solid var(--border-line);
+    border-radius: 8px;
+    padding: .3rem 1rem;
+    margin: 1.4rem 0;
+    /* Equations are not prose, so they use the full card width, not the reading measure */
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+
+/* The full step-by-step derivation is far wider than any other equation, and the
+   two-column desktop layout leaves the article column narrower than the single-column
+   one. Scale just that block so it fits beside the table of contents. Declared before
+   the width media queries so the phone sizes below still win on small screens. */
+.eq-wide { font-size: 82%; }
+
+/* ---------- takeaway ---------- */
+.takeaway {
+    background: rgba(30,64,175,.06);
+    border: 1px solid rgba(30,64,175,.16);
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+    margin: 1.9rem 0;
+    max-width: var(--measure);
+}
+.takeaway .label {
+    display: block;
+    font-size: .7rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: .35rem;
+}
+.takeaway p { margin: 0; font-size: .98rem; color: var(--text-medium); }
+
+/* ---------- table of contents ---------- */
+.toc {
+    position: sticky; top: 5.5rem;
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.2rem 1.3rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    font-size: .88rem;
+}
+.toc h3 {
+    font-size: .7rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--text-light); margin-bottom: .8rem;
+}
+.toc ol { list-style: none; counter-reset: toc; }
+.toc li { counter-increment: toc; }
+.toc a {
+    display: block; padding: .35rem .6rem .35rem .55rem;
+    color: var(--text-medium); text-decoration: none;
+    border-left: 2px solid var(--border-line);
+    border-radius: 0 5px 5px 0;
+    line-height: 1.4;
+}
+.toc a::before {
+    content: counter(toc) '.';
+    color: var(--text-light); margin-right: .4rem; font-variant-numeric: tabular-nums;
+}
+.toc a:hover { background: var(--surface); color: var(--accent); text-decoration: none; }
+.toc a.active {
+    color: var(--accent); font-weight: 600;
+    border-left-color: var(--accent);
+    background: rgba(30,64,175,.06);
+}
+.toc a.active::before { color: var(--accent); }
+
+/* ---------- footer ---------- */
+.article-footer {
+    margin-top: 2.8rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--border-soft);
+    font-size: .85rem; color: var(--text-light);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1080px) {
+    .page { grid-template-columns: minmax(0, 1fr); }
+    .toc { position: static; order: -1; padding: 1rem 1.2rem; }
+    .toc ol { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .toc a {
+        border-left: none; border-radius: 18px;
+        background: var(--surface); padding: .28rem .85rem;
+    }
+    .toc a.active { border-left: none; }
+}
+/* Below ~760px the card is narrower than the widest gradient, so scale the math
+   down rather than make readers scroll. (Scaling must sit on .eq, not on
+   mjx-container, which carries an inline font-size from MathJax.) */
+@media (max-width: 760px) {
+    .eq { font-size: 84%; }
+}
+
+@media (max-width: 640px) {
+    body { font-size: 16px; }
+    .page { padding: 5rem 1rem 2rem; }
+    .article-card { padding: 1.9rem 1.2rem; }
+    .paper-ref { flex-direction: column; gap: .3rem; }
+    /* Phone widths: trim the box padding too, so only the single widest
+       equation is left needing a swipe. */
+    .eq { font-size: 80%; padding-left: .5rem; padding-right: .5rem; }
+}
+
+@media print {
+    body { background: #fff; }
+    .topbar, .toc, .progress-track { display: none; }
+    .page { padding: 0; display: block; max-width: none; }
+    .article-card { box-shadow: none; padding: 0; opacity: 1 !important; }
+    .eq { break-inside: avoid; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<nav class="topbar">
+    <div class="topbar-inner">
+        <a href="../index.html" class="site-nav-logo">Zeshi Yang</a>
+        <ul class="site-nav-menu">
+            <li><a href="../index.html" class="site-nav-link">Home</a></li>
+            <li><a href="index.html" class="site-nav-link active">Blogs</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page" id="top">
+
+    <article class="article-card">
+
+        <span class="eyebrow">Paper Notes</span>
+
+        <h1>Is OpenAI's Mysterious RL Algorithm Just an STE Approximation?</h1>
+
+        <div class="byline">
+            <strong>Zeshi Yang</strong>
+            <span class="sep">·</span>
+            <time datetime="2026-09-20">September 20, 2026</time>
+        </div>
+
+        <div class="paper-ref">
+            <span class="label">Discussing</span>
+            <span><a href="https://arxiv.org/abs/2609.20807"><cite>Score Centering Stabilizes Off-policy Reinforcement Learning</cite></a>, Martin Marek and Max Ryabinin, arXiv:2609.20807.</span>
+        </div>
+
+        <p class="lede">A recent arXiv paper, <em>Score Centering Stabilizes Off-policy Reinforcement Learning</em>, has attracted attention as a possible account of the reinforcement-learning algorithm used in OpenAI's post-training pipeline. Curious about the method, I took a closer look. My main takeaway is that score centering can be understood as an approximate implementation of a straight-through estimator (STE), a trick that has long been used in sim-to-real reinforcement learning. Nothing is entirely new under the sun. In this post, I will walk through this interpretation in detail.</p>
+
+        <h2 id="setup">The Problem Setup for LLM Reinforcement Learning<a class="anchor" href="#setup" aria-label="Link to this section">#</a></h2>
+
+        <p>One complication in LLM reinforcement learning is that training and inference often use different engines: Megatron for training and vLLM for inference. Even given the same input, the two engines can produce slightly different logits in the forward pass. This train-inference mismatch is a key distinction between LLM RL and conventional RL with smaller models.</p>
+
+        <p>Our actual goal is to maximize the performance of the model deployed with vLLM, not the one trained with Megatron.</p>
+
+        <p>To formalize the problem, consider it from the perspective of information-geometric optimization (IGO). We use vLLM to generate rollout trajectories, evaluate them with rewards, and obtain an optimal target distribution. The goal is then to optimize the policy by minimizing its KL divergence from this target distribution.</p>
+
+        <p>The difficulty is that we cannot backpropagate through the model running in vLLM. We therefore use gradients computed in Megatron as a proxy for the unavailable vLLM gradients. In practice, this changes the RL objective from</p>
+
+        <div class="eq">
+        $$
+        \mathbb{E}_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        \frac{P_{\mathrm{vLLM}}(x)}{P_{\mathrm{vLLM}}^{\mathrm{old}}(x)}R(x)
+        \right]
+        $$
+        </div>
+
+        <p>to</p>
+
+        <div class="eq">
+        $$
+        \mathbb{E}_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        \frac{P_{\mathrm{Megatron}}(x)}{P_{\mathrm{vLLM}}^{\mathrm{old}}(x)}R(x)
+        \right].
+        $$
+        </div>
+
+        <p>Keep this expression in mind, as it captures the central issue in LLM RL.</p>
+
+        <h2 id="objective">Analyzing the Objective<a class="anchor" href="#objective" aria-label="Link to this section">#</a></h2>
+
+        <p>The key observation is that the probability ratio in the second objective is not necessarily 1, even at the beginning of optimization. It therefore cannot be understood in the same way as the ratio used in PPO clipping.</p>
+
+        <p>In PPO, the ratio starts at 1 and changes only as the policy is updated. Clipping this ratio keeps the new policy close to the old one and helps stabilize optimization. With a train-inference mismatch between vLLM and Megatron, however, the ratio can already differ from 1 before any update occurs. Clipping does not address this mismatch and may even be harmful. I believe this helps explain why approaches such as MIS and bypass-PPO often fail.</p>
+
+        <p>A simple and natural alternative is to use a straight-through estimator. Let \(Z_{\mathrm{Megatron}}(x)\) denote the logits computed by Megatron, and let \(Z_{\mathrm{vLLM}}^{\mathrm{old}}(x)\) denote those computed by vLLM under the old policy. We can define surrogate logits as</p>
+
+        <div class="eq">
+        $$
+        Z_{\mathrm{Megatron}}(x)
+        +\operatorname{sg}\!\left[
+        Z_{\mathrm{vLLM}}^{\mathrm{old}}(x)
+        -Z_{\mathrm{Megatron}}^{\mathrm{old}}(x)
+        \right],
+        $$
+        </div>
+
+        <p>where \(\operatorname{sg}[\cdot]\) denotes the stop-gradient operator. The corresponding surrogate distribution is</p>
+
+        <div class="eq">
+        $$
+        \hat P_{\mathrm{Megatron}}
+        =\operatorname{Softmax}\!\left(
+        Z_{\mathrm{Megatron}}(x)
+        +\operatorname{sg}\!\left[
+        Z_{\mathrm{vLLM}}^{\mathrm{old}}(x)
+        -Z_{\mathrm{Megatron}}^{\mathrm{old}}(x)
+        \right]
+        \right).
+        $$
+        </div>
+
+        <p>The RL objective can then be written as</p>
+
+        <div class="eq">
+        $$
+        \mathbb{E}_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        \frac{\hat P_{\mathrm{Megatron}}(x)}
+        {P_{\mathrm{vLLM}}^{\mathrm{old}}(x)}R(x)
+        \right].
+        $$
+        </div>
+
+        <p>At the old parameters, the surrogate distribution matches the vLLM distribution in the forward pass, making the ratio equal to 1. The complete gradient derivation is</p>
+
+        <div class="eq eq-wide">
+        $$
+        \begin{aligned}
+        &\left.
+        \nabla_\theta
+        \mathbb E_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        \frac{\widehat P_{\mathrm{Megatron}}(x;\theta)}
+        {P_{\mathrm{vLLM}}^{\mathrm{old}}(x)}
+        R(x)
+        \right]
+        \right|_{\theta=\theta_{\mathrm{old}}}
+        \\[12pt]
+        &=
+        \mathbb E_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        \frac{R(x)}{P_{\mathrm{vLLM}}^{\mathrm{old}}(x)}
+        \left.
+        \nabla_\theta\widehat P_{\mathrm{Megatron}}(x;\theta)
+        \right|_{\theta=\theta_{\mathrm{old}}}
+        \right]
+        \\[12pt]
+        &=
+        \mathbb E_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        \underbrace{
+        \frac{
+        \widehat P_{\mathrm{Megatron}}(x;\theta_{\mathrm{old}})
+        }{
+        P_{\mathrm{vLLM}}^{\mathrm{old}}(x)
+        }
+        }_{=\,1}
+        R(x)
+        \left.
+        \nabla_\theta
+        \log\widehat P_{\mathrm{Megatron}}(x;\theta)
+        \right|_{\theta=\theta_{\mathrm{old}}}
+        \right]
+        \\[12pt]
+        &=
+        \mathbb E_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        R(x)
+        \left.
+        \left(
+        \nabla_\theta Z_{\mathrm{Megatron}}(x;\theta)
+        -
+        \sum_v
+        \widehat P_{\mathrm{Megatron}}(v;\theta)
+        \nabla_\theta Z_{\mathrm{Megatron}}(v;\theta)
+        \right)
+        \right|_{\theta=\theta_{\mathrm{old}}}
+        \right]
+        \\[12pt]
+        &=
+        \mathbb E_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        R(x)
+        \left.
+        \left(
+        \nabla_\theta Z_{\mathrm{Megatron}}(x;\theta)
+        -
+        \sum_v
+        P_{\mathrm{vLLM}}^{\mathrm{old}}(v)
+        \nabla_\theta Z_{\mathrm{Megatron}}(v;\theta)
+        \right)
+        \right|_{\theta=\theta_{\mathrm{old}}}
+        \right]
+        \\[12pt]
+        &=
+        \mathbb E_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \left[
+        R(x)
+        \left.
+        \left(
+        \nabla_\theta\log P_{\mathrm{Megatron}}(x;\theta)
+        -
+        \sum_v
+        P_{\mathrm{vLLM}}^{\mathrm{old}}(v)
+        \nabla_\theta\log P_{\mathrm{Megatron}}(v;\theta)
+        \right)
+        \right|_{\theta=\theta_{\mathrm{old}}}
+        \right]
+        \qquad \text{(SC)}.
+        \end{aligned}
+        $$
+        </div>
+
+        <div class="takeaway">
+            <span class="label">Key result</span>
+            <p>This is exactly the same gradient as the one used by the algorithm attributed to OpenAI. In other words, the method can be interpreted as an STE approximation that compensates for the inference mismatch between Megatron and vLLM.</p>
+        </div>
+
+        <h2 id="off-policy">What Changes in the Off-Policy Setting?<a class="anchor" href="#off-policy" aria-label="Link to this section">#</a></h2>
+
+        <p>So far, the derivation has assumed an on-policy setting, where each batch of rollout data is used for a single optimizer step. Once we reuse rollout data to improve sample efficiency, the training becomes off-policy, and the two formulations are no longer equivalent.</p>
+
+        <p>The gradient of the surrogate-STE version becomes</p>
+
+        <div class="eq">
+        $$
+        \begin{aligned}
+        \mathbb{E}_{x\sim P_{\mathrm{vLLM}}^{\mathrm{old}}}
+        \Bigg[
+        \frac{\hat P_{\mathrm{Megatron}}(x)}
+        {P_{\mathrm{vLLM}}^{\mathrm{old}}(x)}R(x)
+        \Bigg(
+        &\nabla_\theta\log P_{\mathrm{Megatron}}(x;\theta)\\
+        &-\sum_v \hat P_{\mathrm{Megatron}}(v)
+        \nabla_\theta\log P_{\mathrm{Megatron}}(v;\theta)
+        \Bigg)
+        \Bigg].
+        \end{aligned}
+        $$
+        </div>
+
+        <p>In this case, the ratio is no longer 1. The surrogate-STE estimator effectively treats the samples as if they were drawn from \(\hat P_{\mathrm{Megatron}}\), whereas score centering continues to use samples drawn from \(P_{\mathrm{vLLM}}^{\mathrm{old}}\). I therefore view the latter estimator as biased because it omits importance sampling. This leads me to expect the surrogate-STE formulation to be more stable in the off-policy setting.</p>
+
+        <p>The paper's authors also evaluate score centering combined with truncated importance sampling (TIS). In my view, that formulation is already quite close to the surrogate-STE variant.</p>
+
+        <h2 id="thoughts">Further Thoughts<a class="anchor" href="#thoughts" aria-label="Link to this section">#</a></h2>
+
+        <p>Looking back, many RL algorithms for LLMs have not been analyzed systematically. They often appear instead as heuristic modifications of earlier methods such as PPO. Clipping makes sense in the original PPO setting because it implicitly constrains how far the updated policy can move. But when the problem is specifically the train-inference mismatch between vLLM and Megatron, I believe clipping is the wrong tool. It tends to invite additional patches, producing a system that is difficult to reason about and tune.</p>
+
+        <p>Starting from the IGO perspective leads to a more direct derivation and a clearer intuition for what is happening. In a sense, this is an exercise in subtraction: removing unnecessary machinery makes the core problem easier to see.</p>
+
+        <p>This viewpoint also suggests room for improvement. An STE provides a surrogate, or &ldquo;fake,&rdquo; gradient, which is not guaranteed to be a valid subgradient. A natural next step would be to use the actual inference behavior of vLLM to correct that surrogate gradient.</p>
+
+        <p>IGO is a powerful mathematical tool. Viewed through this lens, the underlying geometry of many RL algorithms becomes much easier to understand.</p>
+
+        <footer class="article-footer">
+            Written by Zeshi Yang · September 20, 2026
+        </footer>
+
+    </article>
+
+    <aside class="toc">
+        <h3>Contents</h3>
+        <ol>
+            <li><a href="#setup">The Problem Setup for LLM Reinforcement Learning</a></li>
+            <li><a href="#objective">Analyzing the Objective</a></li>
+            <li><a href="#off-policy">What Changes in the Off-Policy Setting?</a></li>
+            <li><a href="#thoughts">Further Thoughts</a></li>
+        </ol>
+    </aside>
+
+</div>
+
+<script>
+// Fail open: if MathJax never loads (blocked CDN, offline), still show the article.
+setTimeout(function () { document.body.classList.add('math-failed'); }, 3000);
+
+var bar = document.getElementById('progressBar');
+function updateProgress() {
+    var h = document.documentElement;
+    var scrollable = h.scrollHeight - h.clientHeight;
+    var pct = scrollable > 0 ? (h.scrollTop / scrollable) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+}
+
+var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+var headings = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+
+function updateActive() {
+    var current = 0;
+    for (var i = 0; i < headings.length; i++) {
+        if (headings[i] && headings[i].getBoundingClientRect().top <= 120) current = i;
+    }
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+}
+
+var ticking = false;
+window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { updateProgress(); updateActive(); ticking = false; });
+}, { passive: true });
+
+updateProgress();
+updateActive();
+</script>
+
+</body>
+</html>
