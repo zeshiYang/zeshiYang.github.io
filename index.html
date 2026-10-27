@@ -160,51 +160,17 @@
   </div>
 
 
-  <!-- Blogs -->
-  <div id="blogs">
+  <!-- Industry projects / Blogs (switchable tabs) -->
+  <div id="projects-blogs">
+    <a name="projects-pos"></a>
     <a name="blogs-pos"></a>
-    <h2 class="page-header"> Blogs </h2>
-
-    <div class="row pub-item industry-item">
-      <div class="col-xs-3">
-        <a href="blog/training-inference-mismatch.html">
-          <img class="img-thumbnail" src="blog/thumbs/training-inference-mismatch.svg" alt="Training–Inference Mismatch in Generative RL">
-        </a>
-      </div>
-      <div class="col-xs-9">
-        <a class="project-link" href="blog/training-inference-mismatch.html"><strong>Training&ndash;Inference Mismatch in Generative RL</strong></a> <span class="industry-year">| Oct 2026</span>
-        <div>Why reward fine-tuning under classifier-free guidance can drift, and why the same fix appears as score centering in LLM RL.</div>
-        <div>Joint with <a href="https://yujiewang.info/" target="_blank" rel="noopener">Yujie Wang</a> (equal contribution).</div>
-        <div class="industry-links">
-          <a href="blog/training-inference-mismatch.html"><i class="fa fa-book"></i> English</a>
-          <a href="blog/training-inference-mismatch.html?lang=zh"><i class="fa fa-language"></i> 中文</a>
-        </div>
-      </div>
+    <div class="page-header section-tabs" role="tablist">
+      <button type="button" class="section-tab active" role="tab" aria-selected="true" aria-controls="tab-industry" data-tab="industry">Industry projects</button>
+      <button type="button" class="section-tab" role="tab" aria-selected="false" aria-controls="tab-blogs" data-tab="blogs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Blogs</button>
     </div>
-    <br>
-
-    <div class="row pub-item industry-item">
-      <div class="col-xs-3">
-        <a href="blog/rl-score-centering-ste.html">
-          <img class="img-thumbnail" src="blog/thumbs/rl-score-centering-ste.svg" alt="Score centering as an STE approximation">
-        </a>
-      </div>
-      <div class="col-xs-9">
-        <a class="project-link" href="blog/rl-score-centering-ste.html"><strong>Is OpenAI's Mysterious RL Algorithm Just an STE Approximation?</strong></a> <span class="industry-year">| Sep 2026</span>
-        <div>Score centering read as an approximate straight-through estimator for the Megatron/vLLM train&ndash;inference mismatch, derived from the IGO perspective.</div>
-        <div class="industry-links">
-          <a href="blog/rl-score-centering-ste.html"><i class="fa fa-book"></i> Read</a>
-          <a href="blog/index.html"><i class="fa fa-list"></i> All posts</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
 
   <!-- Software -->
-  <div id="Industry projects">
-    <a name="projects-pos"></a>
-    <h2 class="page-header"> Industry projects </h2>
+  <div id="tab-industry" class="tab-panel" role="tabpanel">
 
     <div class="row pub-item industry-item">
       <div class="col-xs-3">
@@ -242,6 +208,49 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Blogs -->
+  <div id="tab-blogs" class="tab-panel" role="tabpanel" hidden>
+
+    <div class="blog-entry">
+      <a class="project-link" href="blog/training-inference-mismatch.html"><strong>Training&ndash;Inference Mismatch in Generative RL</strong></a> <span class="industry-year">| Oct 2026</span>
+      <div>Why reward fine-tuning under classifier-free guidance can drift, and why the same fix appears as score centering in LLM RL.</div>
+      <div>Joint with <a href="https://yujiewang.info/" target="_blank" rel="noopener">Yujie Wang</a> (equal contribution).</div>
+      <div class="industry-links">
+        <a href="blog/training-inference-mismatch.html"><i class="fa fa-book"></i> English</a>
+        <a href="blog/training-inference-mismatch.html?lang=zh"><i class="fa fa-language"></i> 中文</a>
+      </div>
+    </div>
+
+    <div class="blog-entry">
+      <a class="project-link" href="blog/rl-score-centering-ste.html"><strong>Is OpenAI's Mysterious RL Algorithm Just an STE Approximation?</strong></a> <span class="industry-year">| Sep 2026</span>
+      <div>Score centering read as an approximate straight-through estimator for the Megatron/vLLM train&ndash;inference mismatch, derived from the IGO perspective.</div>
+      <div class="industry-links">
+        <a href="blog/rl-score-centering-ste.html"><i class="fa fa-book"></i> Read</a>
+        <a href="blog/index.html"><i class="fa fa-list"></i> All posts</a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+  (function () {
+    var tabs = document.querySelectorAll('#projects-blogs .section-tab');
+    function show(name) {
+      for (var i = 0; i < tabs.length; i++) {
+        var t = tabs[i], on = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      }
+    }
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].addEventListener('click', function () { show(this.getAttribute('data-tab')); });
+    }
+    if (/^#blogs/.test(location.hash)) show('blogs');
+  })();
+  </script>
 
 
 
