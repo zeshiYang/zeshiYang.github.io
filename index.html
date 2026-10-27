@@ -14,7 +14,7 @@
   <!-- font awesome style -->
   <link rel="stylesheet" type="text/css" href="src/font-awesome/css/font-awesome.min.css">
   <!-- costum style -->
-  <link rel="stylesheet" type="text/css" href="src/costum_style.css?v=20261027">
+  <link rel="stylesheet" type="text/css" href="src/costum_style.css?v=20261027b">
 
   <!-- javascript -->
   <script src="src/jquery-3.2.1.min.js"></script>
@@ -160,17 +160,10 @@
   </div>
 
 
-  <!-- Industry projects / Blogs (switchable tabs) -->
-  <div id="projects-blogs">
-    <a name="projects-pos"></a>
-    <a name="blogs-pos"></a>
-    <div class="page-header section-tabs" role="tablist">
-      <button type="button" class="section-tab active" role="tab" aria-selected="true" aria-controls="tab-industry" data-tab="industry">Industry projects</button>
-      <button type="button" class="section-tab" role="tab" aria-selected="false" aria-controls="tab-blogs" data-tab="blogs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Blogs</button>
-    </div>
-
   <!-- Software -->
-  <div id="tab-industry" class="tab-panel" role="tabpanel">
+  <div id="Industry projects">
+    <a name="projects-pos"></a>
+    <h2 class="page-header"> Industry projects </h2>
 
     <div class="row pub-item industry-item">
       <div class="col-xs-3">
@@ -211,7 +204,9 @@
 
 
   <!-- Blogs -->
-  <div id="tab-blogs" class="tab-panel" role="tabpanel" hidden>
+  <div id="blogs">
+    <a name="blogs-pos"></a>
+    <h2 class="page-header"> Blogs </h2>
 
     <div class="blog-entry">
       <a class="project-link" href="blog/training-inference-mismatch.html"><strong>Training&ndash;Inference Mismatch in Generative RL</strong></a> <span class="industry-year">| Oct 2026</span>
@@ -232,25 +227,6 @@
       </div>
     </div>
   </div>
-  </div>
-
-  <script>
-  (function () {
-    var tabs = document.querySelectorAll('#projects-blogs .section-tab');
-    function show(name) {
-      for (var i = 0; i < tabs.length; i++) {
-        var t = tabs[i], on = t.getAttribute('data-tab') === name;
-        t.classList.toggle('active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-      }
-    }
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].addEventListener('click', function () { show(this.getAttribute('data-tab')); });
-    }
-    if (/^#blogs/.test(location.hash)) show('blogs');
-  })();
-  </script>
 
 
 

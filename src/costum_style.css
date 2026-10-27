@@ -163,79 +163,8 @@ a {
   margin-bottom: 20px;
 }
 
-/* Industry projects / Blogs switchable tabs */
-.section-tabs {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 14px;
-  margin-bottom: 0;
-  border-bottom: 1px solid rgba(30, 64, 175, 0.3);
-  font-weight: 500;
-  line-height: 1.1;
-}
-/* tabs sit on the line; the open tab merges into the framed panel below */
-.section-tabs .section-tab {
-  position: relative;
-  overflow: hidden;
-  border-bottom: 0;
-  border-radius: 10px 10px 0 0;
-  margin-bottom: -1px;
-  padding-bottom: 10px;
-  box-shadow: none;
-}
-/* thick accent bar along the bottom of the open tab */
-.section-tabs .section-tab::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #1e40af, #4a6fa5);
-  transform: scaleX(0);
-  transition: transform 0.25s ease;
-}
-.section-tabs .section-tab.active::after { transform: scaleX(1); }
-.tab-panel {
-  border: 1px solid rgba(30, 64, 175, 0.3);
-  border-top: 0;
-  border-radius: 0 0 10px 10px;
-  padding: 22px 20px 6px;
-  margin-bottom: 10px;
-}
-/* both tabs always look like buttons; colour shows which one is open */
-.section-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 20px;
-  font: inherit;
-  color: #7b8490;
-  background: #f1f3f6;
-  border: 1px solid #d5dae1;
-  border-radius: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.section-tab i { font-size: 0.85em; }
-.section-tab:hover {
-  color: #4a6fa5;
-  background: rgba(30, 64, 175, 0.06);
-  border-color: rgba(30, 64, 175, 0.2);
-}
-/* active tab uses the same colours as .research-tag */
-.section-tab.active,
-.section-tab.active:hover {
-  color: #1e40af;
-  background: rgba(30, 64, 175, 0.15);
-  border-color: rgba(30, 64, 175, 0.3);
-  box-shadow: none;
-  cursor: default;
-}
-.section-tab:focus { outline: none; }
-.section-tab:focus-visible { outline: 2px solid rgba(30, 64, 175, 0.4); outline-offset: 2px; }
-
-.blog-entry { margin-bottom: 22px; }
+/* blog entries on the home page (text only) */
+.blog-entry { margin-bottom: 22px; padding: 0 10px; }
 .blog-entry .project-link { font-size: 18px; }
 
 /* education & career */
